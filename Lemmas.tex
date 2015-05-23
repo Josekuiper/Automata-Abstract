@@ -1,0 +1,183 @@
+\documentclass[a4paper,twoside,11pt]{article}
+\usepackage{a4wide,graphicx,fancyhdr,amsmath,amssymb,algorithm,algorithmicx,algpseudocode, caption, subcaption, pdfpages, wrapfig, array, mathtools, longtable, xtab}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{upgreek}
+\usepackage{enumitem}
+%----------------------- Macros and Definitions --------------------------
+
+\setlength\headheight{20pt}
+\addtolength\topmargin{-10pt}
+\addtolength\footskip{20pt}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\ch}{\mathcal{CH}}
+
+\newcommand{\solution}[1]{\noindent{\bf Solution to Exercise #1:}}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyhead[LO,RE]{\sffamily\bfseries\large Eindhoven University of Technology}
+\fancyhead[RO,LE]{\sffamily\bfseries\large 2IT70 Automata and Process Theory}
+\fancyfoot[LO,RE]{\sffamily\bfseries\large Department of Mathematics and Computer Science}
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO,LE]{\sffamily\bfseries\large Eindhoven University of Technology}
+\fancyhead[LO,RE]{\sffamily\bfseries\large 2IT70 Automata and Process Theory}
+\fancyfoot[LO,RE]{\sffamily\bfseries\large Department of Mathematics and Computer Science}
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%-------------------------------- Title ----------------------------------
+
+\title{\vspace{-\baselineskip}\sffamily\bfseries Lemmas, Theorems and Definitions\\
+Pumping Lemma through page 52}
+\author{Author: José Kuiper\\}
+
+\date{\today}
+
+%--------------------------------- Text ----------------------------------
+
+\begin{document}
+\maketitle
+\section{Lemmas and Theorems}
+\subsection{Chapter 2}
+\begin{xtabular}[h]{|l| p{14cm} |}
+\hline
+2.27&Pumping Lemma for regular languages:\\
+&This theorem can be used to prove that a language is not regular.\\
+&Details:\\
+&Let $L$ be a regular language over an alphabet $\sum$. There exists a constant $m > 0$ such that each $w \in L$ with $|w| > m$ can be written as $w = xyz$ where $x,\, y,\, z\, \in \sum$*, $y \neq \varepsilon$, $|xy| \leq m$, and for all $k > 0$: $xy^kz \in L$.\\[3pt]
+\hline
+2.30&Let $L$ be a regular language over an alphabet $\sum$ represented by an NFA $N$ accepting $L$. Then it can be decided if $L = \emptyset$ or not.\\[3pt]
+\hline
+2.31&With this theorem you can decide whether a string is in a language or not.\\
+&Details:\\
+&Let $L \subseteq \sum$* be a regular language over the alphabet $\sum$, represented by an NFA $N$ accepting $L$, and let $w \in \sum$* be a string over $\sum$. Then it can be decided if $w \in L$ or not.\\
+&How to prove this:\\
+&Construct, using the algorithm given in the proof of Theorem 2.13, a DFA $D$ such that $\mathcal{L}(D) = \mathcal{L}(N)$. Simulate $D$ starting from its initial state on input $w$, say\\
+&$(q_0,\, w)\, \vdash$*$_D\, (q',\, \varepsilon)$ for some state $q'$ of $D$. Decide $w \in L$ if $q'$ is a final state of $D$, decide $w \notin L$ otherwise.\\[3pt]
+\hline
+\end{xtabular}
+
+\subsection{Chapter 3}
+\begin{xtabular}[h] {|l| p{14cm} |}
+\hline
+\multicolumn{2}{|c|}{\textbf{3.1 Push-down automata}} \\
+\hline
+3.2&Definition of a push-down automaton:\\
+&A push-down automaton (PDA) is a septuple $P = (Q,\, \sum,\, \Delta,\, \emptyset,\, \rightarrow,\, q_0,\, F)$ where\\
+&1. $Q$ is a finite set of states,\\
+&2. $\sum$ is a finite input alphabet with $\tau \neq \sum$,\\
+&3. $\Delta$ is a finite data alphabet or stack alphabet,\\
+&4. $\emptyset \neq \Delta$ a special symbol denoting an empty stack,\\
+&5. $\rightarrow\, \subseteq Q \times \sum_\tau \times\, \Delta_\emptyset \times \Delta$* $\times\, Q$, where $\sum_\tau = \sum \cup {\tau}$ and $\Delta_\emptyset = \Delta \cup {\emptyset}$, is a finite set of transitions or steps,\\
+&6. $q_0 \in Q$ is the initial state,\\
+&7. $F \subseteq Q$ is the set of final states.\\[3pt]
+\hline
+3.4&Definition of configuration of a PDA:\\
+&Let $P = (Q,\, \sum,\, \Delta,\, \emptyset,\, \rightarrow,\, q_0,\, F)$ be a push-down automaton. A configuration or instantaneous description (ID) of $P$ is a triple $(q,\, w,\, x) \in Q \times \sum$* $\times\, \Delta$*. The relation $\vdash_P\, \subseteq (Q \times \sum$* $\times\, \Delta$*) $\times\, (Q \times \sum$* $\times\, \Delta$*) is given as follows.\\
+&\begin{tabular} {r @{}>{\hfill}p{1.95cm} @{}p{0.2cm} @{}p{2.48cm} @{}l}
+(i)& $(q,\, aw,\, dy)$&& $\vdash_P\, (p,\, w,\, xy)$ &if $q \xrightarrow{a[d/x]} p$\\
+(ii)& $(q,\, w,\, dy)$&& $\vdash_P\, (p,\, w,\, xy)$ &if $q \xrightarrow{\tau[d/x]} p$\\
+(iii)& $(q,\, aw,\, \varepsilon)$&& $\vdash_P\, (p,\, w,\, x)$ &if $q \xrightarrow{a[\emptyset/x]} p$\\
+(iv)& $(q,\, w,\, \varepsilon)$&& $\vdash_P\, (p,\, w,\, x)$ &if $q \xrightarrow{\tau[\emptyset/x]} p$\\[4pt]
+\end{tabular}\\
+\hline
+3.6&Lemma for PDA properties, stating that suffixes for strings and stacks don't matter for configurations. Let $P = (Q,\, \sum,\, \Delta,\, \emptyset,\, \rightarrow,\, q_0,\, F)$ be a push-down automaton.\\[3pt]
+&\begin{tabular} {p{0.6cm} @{}l}
+(a)& For $w,$ $w',$ $v \in \sum$*, $q,$ $q' \in Q$, $x,$ $x',$ $y \in \Delta$* with $x \neq \varepsilon$, it holds that\\
+ & \qquad $(q,$ $wv,$ $xy)\, \vdash_P (q',$ $w'v,$ $x'y) \Leftrightarrow (q,$ $w,$ $x)\, \vdash_P (q',$ $w',$ $x')$\\[5pt]
+(b)& For $n \geq 0$, $w_i \in \sum$*, $q_i \in Q$, $x_i \in \Delta$* with $x_i \neq \varepsilon$, for $1 \leq i < n$, $v \in \sum$* and \\
+&  $y \in \Delta$*, it holds that\\
+&  \qquad $(q_0,\, w_0v,\, x_0y)\, \vdash_P\, (q_1,\, w_1v,\, x_1y)\, \vdash_P\, ...\, \vdash_P\, (q_n,\, w_nv,\, x_ny)$\\
+& \qquad \qquad \qquad \qquad \qquad \qquad \quad \ $\Leftrightarrow$\\
+& \qquad \quad \ $(q_0,\, w_0,\, x_0)\, \vdash_P\, (q_1,\, w_1,\, x_1)\, \vdash_P\, ...\, \vdash_P\, (q_n,\, w_n,\, x_n)$\\[3pt]
+\end{tabular}\\
+\hline
+3.7&Definition on when a language is accepted by a PDA:\\
+&Let $P = (Q,\, \sum,\, \Delta,\, \emptyset,\, \rightarrow,\, q_0,\, F)$ be a push-down automaton. The language $\mathcal{L}(P)$, called the language $accepted$ by the push-down automaton $P$, is given by:\\
+& \qquad \quad $\{\, w \in \sum$* $|\, \exists_q \in F\, \exists_x \in \Delta$*: $(q_0,\, w,\, \varepsilon)\, \vdash$*$_P\, (q,\, \varepsilon,\, x)\, \}$\\
+&Note that we require $q$ to be a final state of $P$, i.e. $q \in F$, but $x$ can be any stack content.\\[2pt]
+\hline
+\end{xtabular}
+
+\begin{xtabular}[h] {|l| p{14cm} |}
+\hline
+\multicolumn{2}{|c|}{\textbf{3.2 Context-free grammars}} \\
+\hline
+3.10&Definition of a context-free grammar: \\
+& A context-free grammar (CFG) is a four-tuple $G = (V,\, T,\, R,\, S)$ where \\[1pt]
+&1. \,$V$ is a non-empty finite set of variables or non-terminals,\\
+&2. \,$T$ is a finite set of terminals,\\
+&3. $R \subseteq V \times\, (V \cup\, T)$* is a finite set of production rules, and\\
+&4. $S \in V$ is the start symbol.\\[1.5pt]
+&Example: $V=\{ S\} ,\, T=\{ a,\, b\}$ and $R$ consists of $S\rightarrow ab$ and $S \rightarrow aSb$.\\[2pt]
+\hline
+3.13& Definition on production, production sequence and language of a CFG. \\
+&Let $G = (V,\, T,\, R,\, S)$ be a context-free grammar.\\
+&{\vspace{-6mm}
+\begin{itemize}
+  \item Let $A \rightarrow \alpha \in R$ be a production rule of $G$. Thus $A \in V$ and $\alpha \in (V \cup \, T)$*. Let $\gamma = \beta_1A\beta_2$ be a string in which $A$ occurs. Put $\gamma ' = \beta_1 \alpha \beta_2$. We say that from the string $\gamma$ the production rule $A \rightarrow \alpha$ produces the string $\gamma '$,\qquad \qquad notation $\gamma \Rightarrow_G \gamma'$.
+  \item A production sequence or derivation is a sequence $(\gamma_i)^n_{i=0}$ such that $\gamma_{i-1} \Rightarrow_G \gamma_i$, for $1 \leq i \leq n$. Often we write
+      {\vspace{-3mm}
+      \begin{equation*}
+         \gamma_0 \Rightarrow_G \gamma_1 \Rightarrow_G ... \Rightarrow_G \gamma_{n-1} \Rightarrow_G \gamma_n
+      \end{equation*}}
+      The length of this production sequence is $n$. In case $\gamma = \gamma_0$ and $\gamma '= \gamma_n$ we also write $\gamma \Rightarrow$*$_G\, \gamma'$.
+  \item Let $A \in V$ be a variable of $G$. The language $\mathcal{L}_G(A)$ generated by $G$ from $A$ is given by
+      {\vspace{-2mm}
+      \begin{equation*}
+      \mathcal{L}_G(A) = \{ w \in T^*\, |\, A \Rightarrow^*_G w \}
+      \end{equation*}}
+      {\vspace{-8mm}}
+  \item The language $\mathcal(G)$, the language generated by the CFG $G$, consists of all strings of terminals that can be produced from the start symbol $S$, i.e.
+      {\vspace{-3mm}
+      \begin{equation*}
+      \mathcal{L}(G) = \mathcal{L}_G(S)
+      \end{equation*}}
+      {\vspace{-10mm}
+  \item A language $L$ is called context-free, if there exists a context-free grammar $G$ such that $L=\mathcal{L}(G)$.}
+\end{itemize}}\\[-10pt]
+\hline
+3.15&Lemma on splitting and combining production sequences. This technical lemma summarizes the context independence of the machinery
+introduced and is used in many situations. Let $G = (V,\, T,\, R,\, S)$ be a context-free grammar.\\
+&\begin{tabular} {l p{12.8cm}}
+(a)& Let $x,\, x',\, y,\, y' \in (V \cup \, T)$*. If $x \Rightarrow^n_G x'$ and $y \Rightarrow^m_G y'$ then $xy \Rightarrow^{n+m}_G x'y'$.\\
+(b)& Let $k \geq 1$, $X_1, ..., X_k \in V \cup \, T,$ $n_1, ..., n_k \geq 0$, and $x_1, ..., x_k \in (V \cup \, T)$*. If $X_1 \Rightarrow^{n_1}_G x_1, ..., X_k \Rightarrow^{n_k}_G x_k$, then $X_1...X_k \Rightarrow^n_G x_1...x_k$ where $n=n_1+...+n_k$.\\
+(c)& Let $X_1, ..., X_k \in V \cup \, T,$ and $x \in (V \cup \, T)$*. If $X_1...X_k \Rightarrow^n_G x$ then exist $n_1, ..., n_k \geq 0$, and $x_1, ..., x_k \in V \cup \, T)$* such that $n=n_1+...+n_k$, $X_1 \Rightarrow^{n_1}_G x_1, ..., X_k \Rightarrow^{n_k}_G x_k,$ and $x=x_1...x_k$.\\[3pt]
+\end{tabular}\\[3pt]
+\hline
+3.17&Definition on left- and rightmost production and sequence.\\
+& Let $G = (V,\, T,\, R,\, S)$ be a context-free grammar. A production $\gamma \Rightarrow_G \gamma'$ is called a leftmost production if $\gamma'$ is obtained from $\gamma$ by application of a production rule of $G$ on the leftmost variable occuring in $\gamma$, i.e., $\gamma = wA\beta,\, A \rightarrow \alpha$ a rule of $G$, $\gamma'= w\alpha\beta$ for some $w \in T$*, $A \in V$, and $\alpha,\, \beta \in (V \cup \, T)$*. Notation, $\gamma \xRightarrow{l}_G \gamma'$. A leftmost derivation of $G$ is a production sequence $(\gamma_i)^n_{i=0}$ of $G$ for which every production is leftmost. Notation, $\gamma \xRightarrow{l}$*$_G\ \gamma'$. Similarly, one can define the notion of a rightmost production and a rightmost derivation for a CFG $G$.\\[3pt]
+\hline
+3.18&Theorem: If $L$ is a regular language, then $L$ is also context-free.\\
+&How to prove:\\
+&Let $D = (Q,\, \sum,\, \delta,\, q_0,\, F)$ be a deterministic automaton that accepts $L$. Define the grammar $G = (Q,\, \sum,\, R,\, q_0)$ where $R$ is given by\\
+& \qquad \qquad \qquad \qquad $R = \{ q \rightarrow aq'\, |\, \delta(q,\, a)=q'\} \cup \{ q \rightarrow \varepsilon\, |\, q \in F \}$\\
+&Then prove that $L \subseteq \mathcal{L}(G)$ as well as the other way around, with the help of a string $w \in L$, from which you may conclude that: $L=\mathcal{L}(G)$.\\
+&Note: the reverse of this theorem does \emph{not} hold!\\
+\hline
+\end{xtabular}
+\\
+\begin{xtabular} {|l| p{14cm} |}
+\hline
+\multicolumn{2}{|c|}{\textbf{3.3 Parse trees}} \\
+\hline
+3.19&Definition of parse trees:\\
+& Let $G = (V,\, T,\, R,\, S)$ be a context-free grammar. The collection $\mathcal{PT}_G$ of parse trees of $G$, a set of rooted node-labeled trees, is given as follows:\\
+&{\vspace{-6mm}\begin{itemize}
+   \item A single root tree $[X]$ with root labeled $X$ is a parse tree for $G$ if $X$ is a variable or terminal of $G$.
+   \item A two-node tree $[A\rightarrow \varepsilon]$, with root labeled $A$ and leaf labeled $\varepsilon$ is a parse tree for G if $A \in V$ and $A \rightarrow \varepsilon$ is a production rule of $G$.
+   \item If $PT_1,\, PT_2,\, ...,\, PT_k$ are $k$ parse trees for $G$ with roots $X_1,\, X_2,\, ...,\, X_k$, respectively, and $A\rightarrow X_1X_2...X_k$ is a production rule of $G$, then the tree $[A\rightarrow PT_1,\, PT_2,\, ...,\, PT_k]$ with root labeled $A$ and subtrees of the root $PT_1,\, PT_2,\, ...,\, PT_k$ is a parse tree for $G$.
+ \end{itemize}}\\
+\hline
+\end{xtabular}
+\end{document}
