@@ -178,6 +178,13 @@ introduced and is used in many situations. Let $G = (V,\, T,\, R,\, S)$ be a con
    \item A two-node tree $[A\rightarrow \varepsilon]$, with root labeled $A$ and leaf labeled $\varepsilon$ is a parse tree for G if $A \in V$ and $A \rightarrow \varepsilon$ is a production rule of $G$.
    \item If $PT_1,\, PT_2,\, ...,\, PT_k$ are $k$ parse trees for $G$ with roots $X_1,\, X_2,\, ...,\, X_k$, respectively, and $A\rightarrow X_1X_2...X_k$ is a production rule of $G$, then the tree $[A\rightarrow PT_1,\, PT_2,\, ...,\, PT_k]$ with root labeled $A$ and subtrees of the root $PT_1,\, PT_2,\, ...,\, PT_k$ is a parse tree for $G$.
  \end{itemize}}\\
+ &Definition of yield function:\\
+ &The yield function: $yield : \mathcal{PT}_G \rightarrow (V \cup\, T)$* with respect to $G$ is given by:\\
+ &{\vspace{-6mm}\begin{itemize}
+   \item $yield([X]) = X$ for $X \in V \cup\, T$,
+   \item $yield([A \rightarrow \varepsilon]) = \varepsilon$ for $A \in V$,
+   \item $yield([A \rightarrow PT_1,\, PT_2,\, ...,\, PT_k]) = yield(PT_1)*yield(PT_2)* ... *yield(PT_k)$ for $A \in V, PT_1,\, ...,\, PT_k \in \mathcal{PT}_G$.
+ \end{itemize}}\\
 \hline
 \end{xtabular}
 \end{document}
