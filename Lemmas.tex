@@ -156,8 +156,7 @@ Pumping Lemma through page 52}
 &Details:\\
 &Let $L \subseteq \sum$* be a regular language over the alphabet $\sum$, represented by an NFA $N$ accepting $L$, and let $w \in \sum$* be a string over $\sum$. Then it can be decided if $w \in L$ or not.\\
 &How to prove this:\\
-&Construct, using the algorithm given in the proof of Theorem 2.13, a DFA $D$ such that ]
-$\mathcal{L}(D) = \mathcal{L}(N)$. Simulate $D$ starting from its initial state on input $w$, say\\
+&Construct, using the algorithm given in the proof of Theorem 2.13, a DFA $D$ such that $\mathcal{L}(D) = \mathcal{L}(N)$. Simulate $D$ starting from its initial state on input $w$, say\\
 &$(q_0,\, w)\, \vdash$*$_D\, (q',\, \varepsilon)$ for some state $q'$ of $D$. Decide $w \in L$ if $q'$ is a final state of $D$, decide $w \notin L$ otherwise.\\[3pt]
 \hline
 \end{xtabular}
