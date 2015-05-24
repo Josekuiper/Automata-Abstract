@@ -39,7 +39,7 @@
 
 \title{\vspace{-\baselineskip}\sffamily\bfseries Lemmas, Theorems and Definitions\\
 Pumping Lemma through page 52}
-\author{Author: José Kuiper\\}
+\author{Author: José Kuiper, Noud de Kroon\\}
 
 \date{\today}
 
@@ -48,6 +48,52 @@ Pumping Lemma through page 52}
 \begin{document}
 \maketitle
 \section{Lemmas and Theorems}
+\subsection{Chapter 1}
+\begin{xtabular}[h]{|l| p{14cm} |}
+	\hline
+	1.1	& Definition of an alphabet: \\
+		& Let $\Sigma$ be an alphabet. The set $\Sigma$* of strings or finite words of $\Sigma$ is defined as follows:\\
+		&  \begin{minipage}{5in}
+				\begin{itemize}
+					\setlength\itemsep{0em}
+					\item The empty string $\epsilon \in \Sigma$*;
+					\item if $a \in \Sigma$* then $aw \in \Sigma$*
+				\end{itemize}
+			\end{minipage} \vspace{3px}\\
+	\hline
+	1.2	& Definition of length of a string:\\
+		& Given an alphabet $\Sigma$, the length $|w|$ for a string $w \in \Sigma$* is given by:\\
+		& (i) $|\epsilon| = 0$, (ii) $|aw| = |w| + 1$.\\
+	\hline
+	1.4 & Definition of concatenations:\\
+		& Let $\Sigma$ be an alphabet. The concatenation $wv \in \Sigma$* of strings $w, v \in \Sigma$* is given by:\\
+		& (i) $\epsilon v = v$, and (ii) $(aw)v = a(wv)$\\
+	\hline
+	def & A string $v$ is called a prefix of a string $w$ if $vu = w$ for some string $u$, notation $v \preccurlyeq w$. In the situation that $v \preccurlyeq w$ we occasionaly write $u = w / v$, so if $v \preccurlyeq w$ then we have $v(w/v)=w$.\\
+	\hline
+	1.5 & Let $\Sigma$ be an alphabet and $c \in \Sigma$. The count $\#_c (w)$ of a symbol $c \in \Sigma$ in a string $w \in \Sigma$* is given by:\\
+		& \begin{minipage}{5in}
+				\begin{itemize}
+					\setlength\itemsep{0em}
+					\item $\#_c (\epsilon) = 0$;
+					\item $\#_c (cw) = \#_c (w) + 1$;
+					\item $\#_c (aw) = \#_c (w)$ if $a \neq c$
+				\end{itemize}
+		\end{minipage} \vspace{3px}\\
+	\hline
+	1.6 & Definition of a language:\\
+		& Let $\Sigma$ be an alphabet. A subset $L \subset \Sigma$* is called a language over $\Sigma$.\\
+	\hline
+	1.8a& Definition of language concatenation:\\
+		& Let $L_1, L_2 \subset \Sigma$* be two languages over an alphabet $\Sigma$. The concatenation $L_1 \cdot L_2$ of $L_1$ and $L_2$ is given by:\\
+		& $L_1 \cdot L_2 = \left\{ w_1 w_2 | w_1 \in L_1, w_2 \in L_2 \right\} $\\ 
+	\hline
+	1.8b& Definition of Kleene-closure:\\
+		& Let $L \subset \Sigma$ be a language over an alphabet $\Sigma$. The Kleene-closure $L$* of $L$ is given by:\\
+		& $L$*$= \left\{w_1 \cdots w_n | n \geq 0, w_1,\cdots,w_n \in L \right\}$\\
+	\hline
+\end{xtabular}
+
 \subsection{Chapter 2}
 \begin{xtabular}[h]{|l| p{14cm} |}
 \hline
